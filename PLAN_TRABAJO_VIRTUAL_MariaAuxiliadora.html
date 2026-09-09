@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plan de Trabajo Virtual · Informática: Word, Excel e Internet · Instituto María Auxiliadora</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --verde: #39a900;
+  --verde-dim: rgba(57,169,0,0.12);
+  --naranja: #ff6b00;
+  --azul: #3b82f6;
+  --purpura: #8b5cf6;
+  --amarillo: #f59e0b;
+  --noche: #0f3460;
+  --texto: #1a1a2e;
+  --texto-dim: #4a5568;
+  --texto-dimmer: #718096;
+  --bg: #f0f4f8;
+  --borde: #e2e8f0;
+  --blanco: #ffffff;
+}
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Inter',sans-serif; background:var(--bg); color:var(--texto); min-height:100vh; }
+
+/* ══ TOPBAR ══ */
+.topbar {
+  background:#1a1a2e; padding:14px 28px;
+  display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;
+  position:sticky; top:0; z-index:50;
+  box-shadow:0 2px 12px rgba(0,0,0,0.25);
+}
+.topbar-left { display:flex; align-items:center; gap:14px; }
+.sena-badge {
+  background:var(--verde); color:#fff; font-weight:900; font-size:14px;
+  padding:6px 12px; border-radius:7px; letter-spacing:1px; flex-shrink:0;
+}
+.topbar-info .title { font-family:'Syne',sans-serif; font-size:14px; font-weight:700; color:#fff; }
+.topbar-info .sub { font-size:11px; color:rgba(255,255,255,0.5); margin-top:2px; }
+.topbar-meta { display:flex; gap:20px; flex-wrap:wrap; }
+.meta-item { text-align:right; }
+.meta-item .val { font-family:'Syne',sans-serif; font-size:15px; font-weight:800; color:var(--verde); }
+.meta-item .lbl { font-size:10px; color:rgba(255,255,255,0.45); text-transform:uppercase; letter-spacing:1px; }
+
+/* ══ HERO ══ */
+.hero {
+  background:linear-gradient(135deg, var(--noche) 0%, #1a1a2e 100%);
+  padding:44px 28px 36px; text-align:center; position:relative; overflow:hidden;
+}
+.hero::before {
+  content:''; position:absolute; width:500px; height:500px;
+  background:var(--verde); border-radius:50%; top:-280px; left:-160px;
+  opacity:0.07; filter:blur(80px);
+}
+.hero-tag {
+  display:inline-flex; align-items:center; gap:7px;
+  background:rgba(57,169,0,0.15); border:1px solid rgba(57,169,0,0.3);
+  color:#6ee66e; padding:6px 16px; border-radius:30px;
+  font-size:11px; font-weight:700; letter-spacing:2px; text-transform:uppercase;
+  margin-bottom:16px; position:relative; z-index:1;
+}
+.hero h1 {
+  font-family:'Syne',sans-serif; font-size:clamp(22px,4vw,38px); font-weight:800;
+  color:#fff; line-height:1.2; margin-bottom:10px; position:relative; z-index:1;
+}
+.hero h1 span { color:var(--verde); }
+.hero-sub { font-size:14px; color:rgba(255,255,255,0.6); position:relative; z-index:1; }
+.hero-counters {
+  display:flex; justify-content:center; gap:16px; flex-wrap:wrap;
+  margin-top:28px; position:relative; z-index:1;
+}
+.counter-pill {
+  background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.1);
+  border-radius:50px; padding:10px 20px; display:flex; align-items:center; gap:10px;
+}
+.counter-pill .num { font-family:'Syne',sans-serif; font-size:22px; font-weight:800; color:var(--verde); }
+.counter-pill .lbl { font-size:11px; color:rgba(255,255,255,0.55); line-height:1.3; }
+
+/* ══ MAIN LAYOUT ══ */
+.main { max-width:1100px; margin:0 auto; padding:36px 20px 60px; }
+
+/* ══ AVISO PENDIENTE ══ */
+.aviso-box {
+  background:rgba(245,158,11,0.08); border:1.5px solid rgba(245,158,11,0.35);
+  border-radius:14px; padding:16px 20px; margin-bottom:36px;
+  display:flex; gap:12px; align-items:flex-start;
+}
+.aviso-box .ico { font-size:22px; flex-shrink:0; }
+.aviso-box p { font-size:13px; color:var(--texto-dim); line-height:1.6; }
+.aviso-box strong { color:var(--texto); }
+
+/* ══ SECTION HEADERS ══ */
+.sec-head { margin-bottom:18px; }
+.sec-tag {
+  display:inline-block; font-size:10px; font-weight:700; letter-spacing:2px;
+  text-transform:uppercase; padding:5px 12px; border-radius:20px; margin-bottom:8px;
+}
+.sec-tag.verde { background:var(--verde-dim); color:var(--verde); }
+.sec-tag.azul { background:rgba(59,130,246,0.1); color:var(--azul); }
+.sec-tag.purpura { background:rgba(139,92,246,0.1); color:var(--purpura); }
+.sec-tag.noche { background:rgba(15,52,96,0.08); color:var(--noche); }
+.sec-titulo { font-family:'Syne',sans-serif; font-size:22px; font-weight:800; color:var(--texto); }
+
+/* ══ SESIONES GRID ══ */
+.sesiones-grid {
+  display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:16px;
+  margin-bottom:48px;
+}
+.sesion-card {
+  background:var(--blanco); border:2px solid var(--borde); border-radius:18px;
+  padding:0; cursor:pointer; transition:border-color .2s, box-shadow .2s, transform .15s;
+  position:relative; overflow:hidden;
+}
+.sesion-card:hover { border-color:var(--verde); box-shadow:0 8px 28px rgba(57,169,0,0.15); transform:translateY(-3px); }
+.sesion-card.activa { border-color:var(--naranja); box-shadow:0 0 0 3px rgba(255,107,0,0.15); }
+.sesion-card.autonomo { background:linear-gradient(180deg,#fafbfc,var(--blanco)); }
+
+.card-stripe { height:4px; width:100%; background:linear-gradient(90deg, var(--verde), var(--naranja)); }
+.sesion-card.autonomo .card-stripe { background:linear-gradient(90deg, var(--amarillo), #d97706); }
+.sesion-card.activa .card-stripe { background:linear-gradient(90deg, var(--naranja), #d97706); }
+
+.card-body { padding:20px 22px 18px; }
+.card-head { display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:14px; gap:10px; }
+.card-num {
+  font-family:'Syne',sans-serif; font-size:11px; font-weight:800; letter-spacing:1.5px;
+  text-transform:uppercase; padding:4px 10px; border-radius:8px;
+  background:var(--verde-dim); color:var(--verde); flex-shrink:0;
+}
+.sesion-card.activa .card-num { background:rgba(255,107,0,0.1); color:var(--naranja); }
+.sesion-card.autonomo .card-num { background:rgba(245,158,11,0.1); color:var(--amarillo); }
+.card-status { font-size:10px; font-weight:700; padding:4px 10px; border-radius:8px; flex-shrink:0; }
+.status-clase { background:rgba(59,130,246,0.1); color:var(--azul); }
+.status-autonomo { background:rgba(245,158,11,0.12); color:var(--amarillo); }
+.status-cierre { background:rgba(139,92,246,0.1); color:var(--purpura); }
+
+.card-titulo { font-family:'Syne',sans-serif; font-size:17px; font-weight:800; color:var(--texto); margin-bottom:4px; }
+.card-fecha { font-size:12px; color:var(--texto-dimmer); margin-bottom:14px; }
+.card-fecha strong { color:var(--texto-dim); }
+
+.card-evidencias { border-top:1px solid var(--borde); padding-top:12px; }
+.ev-row { display:flex; align-items:center; gap:8px; padding:5px 0; }
+.ev-dot { width:7px; height:7px; border-radius:50%; flex-shrink:0; background:var(--verde); }
+.sesion-card.autonomo .ev-dot { background:var(--amarillo); }
+.ev-text { font-size:12px; color:var(--texto-dim); line-height:1.4; }
+.ev-text strong { color:var(--texto); font-weight:600; }
+
+.card-cta {
+  display:flex; align-items:center; justify-content:center; gap:6px;
+  margin-top:14px; padding:9px; border-radius:10px;
+  background:var(--verde-dim); color:var(--verde);
+  font-size:12px; font-weight:700; transition:background .2s;
+}
+.sesion-card:hover .card-cta { background:rgba(57,169,0,0.2); }
+.sesion-card.activa .card-cta { background:rgba(255,107,0,0.1); color:var(--naranja); }
+.sesion-card.autonomo .card-cta { background:rgba(245,158,11,0.12); color:var(--amarillo); }
+
+/* ══ PORTAFOLIO ══ */
+.portafolio-box {
+  background:var(--blanco); border:2px solid var(--borde); border-radius:18px;
+  padding:24px 28px; margin-bottom:48px;
+}
+.portafolio-tree { margin-top:16px; font-family:monospace; font-size:13px; line-height:1.9; }
+.tree-root { color:var(--texto); font-weight:700; }
+.tree-branch { color:var(--texto-dim); padding-left:20px; }
+.tree-leaf { color:var(--azul); padding-left:40px; }
+
+/* ══ INFO GUIA ══ */
+.guia-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:12px; margin-bottom:48px; }
+.guia-card { background:var(--blanco); border:1px solid var(--borde); border-radius:14px; padding:18px 20px; }
+.guia-card .icon { font-size:28px; margin-bottom:10px; }
+.guia-card h4 { font-family:'Syne',sans-serif; font-size:14px; font-weight:800; color:var(--texto); margin-bottom:6px; }
+.guia-card p { font-size:13px; color:var(--texto-dim); line-height:1.6; }
+
+/* ══ MODAL ══ */
+.overlay {
+  position:fixed; inset:0; background:rgba(15,20,40,0.75);
+  backdrop-filter:blur(6px); z-index:200;
+  display:flex; align-items:center; justify-content:center;
+  padding:20px; opacity:0; pointer-events:none;
+  transition:opacity .25s;
+}
+.overlay.open { opacity:1; pointer-events:all; }
+.modal {
+  background:var(--blanco); border-radius:22px;
+  width:100%; max-width:680px; max-height:88vh;
+  overflow:hidden; display:flex; flex-direction:column;
+  box-shadow:0 24px 64px rgba(0,0,0,0.35);
+  transform:translateY(20px) scale(0.97);
+  transition:transform .25s;
+}
+.overlay.open .modal { transform:translateY(0) scale(1); }
+
+.modal-stripe { height:5px; flex-shrink:0; }
+.modal-header {
+  padding:20px 24px 16px; display:flex; align-items:flex-start;
+  justify-content:space-between; gap:12px; border-bottom:1px solid var(--borde);
+  flex-shrink:0;
+}
+.modal-header-left { flex:1; }
+.modal-sesnum { font-size:10px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--verde); margin-bottom:4px; }
+.modal-titulo { font-family:'Syne',sans-serif; font-size:22px; font-weight:800; color:var(--texto); }
+.modal-fecha { font-size:13px; color:var(--texto-dimmer); margin-top:3px; }
+.modal-close {
+  width:34px; height:34px; border-radius:50%; border:none;
+  background:var(--bg); cursor:pointer; font-size:18px; color:var(--texto-dimmer);
+  display:flex; align-items:center; justify-content:center;
+  transition:background .2s; flex-shrink:0;
+}
+.modal-close:hover { background:var(--borde); }
+
+.modal-body { padding:20px 24px; overflow-y:auto; flex:1; }
+
+.act-row { display:flex; gap:10px; padding:8px 0; border-bottom:1px solid var(--borde); }
+.act-row:last-child { border-bottom:none; }
+.act-time { font-size:11px; color:var(--texto-dimmer); min-width:80px; flex-shrink:0; padding-top:1px; }
+.act-info strong { display:block; font-size:13px; color:var(--texto); margin-bottom:2px; }
+.act-info span { font-size:12px; color:var(--texto-dim); }
+.act-file {
+  font-size:10px; font-family:monospace; color:var(--verde); font-weight:700;
+  background:var(--verde-dim); padding:2px 6px; border-radius:4px; margin-top:3px; display:inline-block;
+}
+
+.ev-section { margin-top:20px; border-top:2px solid var(--borde); padding-top:16px; }
+.ev-section h4 { font-family:'Syne',sans-serif; font-size:14px; font-weight:700; color:var(--texto); margin-bottom:12px; }
+.ev-card-modal {
+  background:var(--bg); border-radius:12px; padding:14px 16px; margin-bottom:10px;
+  border-left:3px solid var(--verde);
+}
+.ev-card-modal .ev-code { font-size:10px; font-weight:700; color:var(--verde); letter-spacing:1px; text-transform:uppercase; margin-bottom:4px; }
+.ev-card-modal .ev-name { font-size:13px; font-weight:600; color:var(--texto); margin-bottom:4px; }
+.ev-card-modal .ev-desc { font-size:12px; color:var(--texto-dim); line-height:1.5; }
+
+.entregable-box {
+  background:rgba(57,169,0,0.05); border:1px solid rgba(57,169,0,0.2);
+  border-radius:12px; padding:14px 16px; margin-top:14px;
+  display:flex; gap:12px; align-items:flex-start;
+}
+.entregable-box .ico { font-size:24px; flex-shrink:0; }
+.entregable-box h5 { font-size:12px; font-weight:700; color:var(--verde); margin-bottom:3px; }
+.entregable-box p { font-size:12px; color:var(--texto-dim); line-height:1.5; }
+
+.modal-footer {
+  padding:14px 24px; border-top:1px solid var(--borde); flex-shrink:0;
+  display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap;
+  background:var(--bg);
+}
+.btn-prev, .btn-next {
+  padding:8px 16px; border-radius:10px; border:none; cursor:pointer;
+  font-size:12px; font-weight:700; transition:background .2s;
+}
+.btn-prev { background:var(--borde); color:var(--texto-dim); }
+.btn-prev:hover { background:#d1d9e6; }
+.btn-next { background:var(--verde); color:#fff; }
+.btn-next:hover { background:#2d7a00; }
+.btn-prev:disabled, .btn-next:disabled { opacity:0.35; cursor:default; }
+
+/* ══ FOOTER ══ */
+footer { background:#1a1a2e; text-align:center; padding:22px; font-size:12px; color:rgba(255,255,255,0.4); line-height:1.8; }
+footer span { color:rgba(255,255,255,0.75); font-weight:600; }
+
+/* ══ RESPONSIVE ══ */
+@media(max-width:600px){
+  .sesiones-grid { grid-template-columns:1fr; }
+  .modal { border-radius:16px 16px 0 0; max-height:92vh; align-self:flex-end; }
+  .overlay { align-items:flex-end; padding:0; }
+  .topbar { padding:12px 16px; }
+  .meta-item { display:none; }
+}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="topbar-left">
+    <div class="sena-badge">SENA</div>
+    <div class="topbar-info">
+      <div class="title">Informática: Word, Excel e Internet · Plan de Trabajo Virtual</div>
+      <div class="sub">Instituto María Auxiliadora · Modalidad virtual (jornada nocturna) · Centro Agroempresarial y Desarrollo Pecuario del Huila – Regional Huila – Garzón</div>
+    </div>
+  </div>
+  <div class="topbar-meta">
+    <div class="meta-item">
+      <div class="val">🌙</div>
+      <div class="lbl">Jornada nocturna</div>
+    </div>
+    <div class="meta-item">
+      <div class="val">9</div>
+      <div class="lbl">Fechas</div>
+    </div>
+    <div class="meta-item">
+      <div class="val">30</div>
+      <div class="lbl">Aspirantes</div>
+    </div>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">🌙 Modalidad Virtual · Jornada Nocturna</div>
+  <h1>Plan de Trabajo<br><span>Informática: Word, Excel e Internet</span></h1>
+  <p class="hero-sub">Instructor: Julián Andrés Trujillo Morales · Centro Agroempresarial y Desarrollo Pecuario del Huila – Regional Huila – Garzón · Instituto María Auxiliadora · Septiembre 2026</p>
+  <div class="hero-counters">
+    <div class="counter-pill">
+      <span class="num">9</span>
+      <span class="lbl">Fechas<br>programadas</span>
+    </div>
+    <div class="counter-pill">
+      <span class="num">7:30–9:30</span>
+      <span class="lbl">Horario<br>nocturno (pm)</span>
+    </div>
+    <div class="counter-pill">
+      <span class="num">3</span>
+      <span class="lbl">Módulos<br>Word · PPT · Excel</span>
+    </div>
+    <div class="counter-pill">
+      <span class="num">100%</span>
+      <span class="lbl">Virtual vía<br>videollamada + Drive</span>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <div class="aviso-box">
+    <span class="ico">⚠️</span>
+    <p><strong>Ficha en trámite:</strong> este curso corresponde a la solicitud de apertura en modalidad virtual radicada ante la Coordinación Académica del Centro Agroempresarial y Desarrollo Pecuario del Huila – Regional Huila – Garzón, para el grupo de 30 aspirantes identificados por el Instituto María Auxiliadora. El número de ficha se actualizará en este plan una vez sea asignado.</p>
+  </div>
+
+  <!-- SESIONES -->
+  <div class="sec-head">
+    <div class="sec-tag verde">📅 Cronograma</div>
+    <h2 class="sec-titulo">Fechas del curso</h2>
+    <p style="font-size:13px; color:var(--texto-dimmer); margin-top:4px;">Todas las sesiones en vivo son en horario nocturno, de <strong>7:30 p.m. a 8:30 p.m.</strong> o de <strong>8:30 p.m. a 9:30 p.m.</strong>, según se confirme con el grupo. Haz clic en cada fecha para ver el detalle.</p>
+  </div>
+
+  <div class="sesiones-grid" id="sesiones-grid">
+
+    <!-- 1 -->
+    <div class="sesion-card activa" data-sesion="0" onclick="abrirModal(0)">
+      <div class="card-stripe"></div>
+      <div class="card-body">
+        <div class="card-head">
+          <span class="card-num">Fecha 1</span>
+          <span class="card-status status-clase">🌙 Encuentro virtual</span>
+        </div>
+        <div class="card-titulo">Socialización y plan de trabajo</div>
+        <div class="card-fecha">Martes <strong>8 de septiembre</strong> · Noche</div>
+        <div class="card-evidencias">
+          <div class="ev-row"><div class="ev-dot"></div><span class="ev-text"><strong>Socialización</strong> · Presentación del curso, metodología virtual y plan de trabajo actualizado</span></div>
+        </div>
+        <div class="card-cta">Ver detalle completo →</div>
+      </div>
+    </div>
+
+    <!-- 2 -->
+    <div class="sesion-card" data-sesion="1" onclick="abrirModal(1)">
+      <div class="card-stripe"></div>
+      <div class="card-body">
+        <div class="card-head">
+          <span class="card-num">Fecha 2</span>
+          <span class="card-status status-clase">🌙 Encuentro virtual</span>
+        </div>
+        <div class="card-titulo">Drive: estructura y entrega de evidencias</div>
+        <div class="card-fecha">Sábado <strong>12 de septiembre</strong> · Noche</div>
+        <div class="card-evidencias">
+          <div class="ev-row"><div class="ev-dot"></div><span class="ev-text"><strong>Instrucciones_Drive_3410069</strong> · Explicación de la estructura de carpetas y cómo subir entregables</span></div>
+        </div>
+        <div class="card-cta">Ver detalle completo →</div>
+      </div>
+    </div>
+
+    <!-- 3 -->
+    <div class="sesion-card autonomo" data-sesion="2" onclick="abrirModal(2)">
+      <div class="card-stripe"></div>
+      <div class="card-body">
+        <div class="card-head">
+          <span class="card-num">Fecha 3</span>
+          <span class="card-status status-autonomo">📝 Trabajo autónomo</span>
+        </div>
+        <div class="card-titulo">Creación de carpeta personal en Drive</div>
+        <div class="card-fecha">Domingo <strong>13 de septiembre</strong></div>
+        <div class="card-evidencias">
+          <div class="ev-row"><div class="ev-dot"></div><span class="ev-text"><strong>Entregable</strong> · Carpeta con nombre completo del aprendiz + 3 subcarpetas: 1. WORD, 2. POWERPOINT y 3. EXCEL</span></div>
+        </div>
+        <div class="card-cta">Ver detalle completo →</div>
+      </div>
+    </div>
+
+    <!-- 4 -->
+    <div class="sesion-card" data-sesion="3" onclick="abrirModal(3)">
+      <div class="card-stripe"></div>
+      <div class="card-body">
+        <div class="card-head">
+          <span class="card-num">Fecha 4</span>
+          <span class="card-status status-clase">🌙 Encuentro virtual</span>
+        </div>
+        <div class="card-titulo">Word 365</div>
+        <div class="card-fecha">Lunes <strong>14 de septiembre</strong> · Noche</div>
+        <div class="card-evidencias">
+          <div class="ev-row"><div class="ev-dot"></div><span class="ev-text"><strong>Módulo Word</strong> · Introducción, atajos y pestañas principales</span></div>
+        </div>
+        <div class="card-cta">Ver detalle completo →</div>
+      </div>
+    </div>
+
+    <!-- 5 -->
+    <div class="sesion-card autonomo" data-sesion="4" onclick="abrirModal(4)">
+      <div class="card-stripe"></div>
+      <div class="card-body">
+        <div class="card-head">
+          <span class="card-num">Fecha 5</span>
+          <span class="card-status status-autonomo">📝 Trabajo autónomo</span>
+        </div>
+        <div class="card-titulo">Trabajo autónomo — Word</div>
+        <div class="card-fecha">Martes <strong>15 de septiembre</strong></div>
+        <div class="card-evidencias">
+          <div class="ev-row"><div class="ev-dot"></div><span class="ev-text"><strong>Entregable</strong> · Actividad práctica de Word subida a la subcarpeta 1. WORD</span></div>
+        </div>
+        <div class="card-cta">Ver detalle completo →</div>
+      </div>
+    </div>
+
+    <!-- 6 -->
+    <div class="sesion-card" data-sesion="5" onclick="abrirModal(5)">
+      <div class="card-stripe"></div>
+      <div class="card-body">
+        <div class="card-head">
+          <span class="card-num">Fecha 6</span>
+          <span class="card-status status-clase">🌙 Encuentro virtual</span>
+        </div>
+        <div class="card-titulo">PowerPoint 365</div>
+        <div class="card-fecha">Sábado <strong>19 de septiembre</strong> · Noche</div>
+        <div class="card-evidencias">
+          <div class="ev-row"><div class="ev-dot"></div><span class="ev-text"><strong>Módulo PowerPoint</strong> · Introducción, atajos y diseño de presentaciones</span></div>
+        </div>
+        <div class="card-cta">Ver detalle completo →</div>
+      </div>
+    </div>
+
+    <!-- 7 -->
+    <div class="sesion-card autonomo" data-sesion="6" onclick="abrirModal(6)">
+      <div class="card-stripe"></div>
+      <div class="card-body">
+        <div class="card-head">
+          <span class="card-num">Fecha 7</span>
+          <span class="card-status status-autonomo">📝 Trabajo autónomo</span>
+        </div>
+        <div class="card-titulo">Trabajo autónomo — PowerPoint</div>
+        <div class="card-fecha">Domingo <strong>20 de septiembre</strong></div>
+        <div class="card-evidencias">
+          <div class="ev-row"><div class="ev-dot"></div><span class="ev-text"><strong>Entregable</strong> · Presentación práctica subida a la subcarpeta 2. POWERPOINT</span></div>
+        </div>
+        <div class="card-cta">Ver detalle completo →</div>
+      </div>
+    </div>
+
+    <!-- 8 -->
+    <div class="sesion-card" data-sesion="7" onclick="abrirModal(7)">
+      <div class="card-stripe"></div>
+      <div class="card-body">
+        <div class="card-head">
+          <span class="card-num">Fecha 8</span>
+          <span class="card-status status-clase">🌙 Encuentro virtual</span>
+        </div>
+        <div class="card-titulo">Excel 365</div>
+        <div class="card-fecha">Lunes <strong>21 de septiembre</strong> · Noche</div>
+        <div class="card-evidencias">
+          <div class="ev-row"><div class="ev-dot"></div><span class="ev-text"><strong>Módulo Excel</strong> · Introducción, atajos, formato y fórmulas básicas</span></div>
+        </div>
+        <div class="card-cta">Ver detalle completo →</div>
+      </div>
+    </div>
+
+    <!-- 9 -->
+    <div class="sesion-card autonomo" data-sesion="8" onclick="abrirModal(8)">
+      <div class="card-stripe"></div>
+      <div class="card-body">
+        <div class="card-head">
+          <span class="card-num">Fecha 9</span>
+          <span class="card-status status-autonomo">📝 Trabajo autónomo</span>
+        </div>
+        <div class="card-titulo">Trabajo autónomo — Excel</div>
+        <div class="card-fecha">Martes <strong>22 de septiembre</strong></div>
+        <div class="card-evidencias">
+          <div class="ev-row"><div class="ev-dot"></div><span class="ev-text"><strong>Entregable</strong> · Ejercicio práctico de Excel subido a la subcarpeta 3. EXCEL</span></div>
+        </div>
+        <div class="card-cta">Ver detalle completo →</div>
+      </div>
+    </div>
+
+    <!-- 10 -->
+    <div class="sesion-card" data-sesion="9" onclick="abrirModal(9)">
+      <div class="card-stripe"></div>
+      <div class="card-body">
+        <div class="card-head">
+          <span class="card-num">Fecha 10</span>
+          <span class="card-status status-cierre">🏁 Cierre</span>
+        </div>
+        <div class="card-titulo">Cierre de la formación y entrega de notas</div>
+        <div class="card-fecha">Miércoles <strong>23 de septiembre</strong> · Noche</div>
+        <div class="card-evidencias">
+          <div class="ev-row"><div class="ev-dot"></div><span class="ev-text"><strong>Cierre</strong> · Verificación final del portafolio Drive y socialización de resultados</span></div>
+        </div>
+        <div class="card-cta">Ver detalle completo →</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- PORTAFOLIO -->
+  <div class="sec-head">
+    <div class="sec-tag purpura">📁 Portafolio Digital</div>
+    <h2 class="sec-titulo">Estructura de entregables en Drive</h2>
+    <p style="font-size:13px; color:var(--texto-dimmer); margin-top:4px;">Cada aprendiz crea su carpeta personal (con nombre completo) desde la Fecha 3, con 3 subcarpetas fijas. Todo el curso se organiza y evalúa a partir de esta estructura.</p>
+  </div>
+  <div class="portafolio-box">
+    <div style="display:flex; align-items:center; gap:12px; margin-bottom:16px;">
+      <span style="font-size:32px;">☁️</span>
+      <div>
+        <div style="font-family:'Syne',sans-serif; font-size:16px; font-weight:800;">[Nombre Completo del Aprendiz]</div>
+        <div style="font-size:12px; color:var(--texto-dimmer);">Compartir con el instructor con permiso de <strong>comentar</strong></div>
+      </div>
+    </div>
+    <div class="portafolio-tree">
+      <div class="tree-root">📁 [Nombre Completo del Aprendiz]/</div>
+      <div class="tree-branch">📂 1. WORD/</div>
+      <div class="tree-leaf">📄 Actividad de Word (Fechas 4 y 5)</div>
+      <div class="tree-branch">📂 2. POWERPOINT/</div>
+      <div class="tree-leaf">📊 Actividad de PowerPoint (Fechas 6 y 7)</div>
+      <div class="tree-branch">📂 3. EXCEL/</div>
+      <div class="tree-leaf">📗 Actividad de Excel (Fechas 8 y 9)</div>
+    </div>
+    <div style="margin-top:14px; background:rgba(57,169,0,0.05); border:1px solid rgba(57,169,0,0.2); border-radius:10px; padding:12px 16px; font-size:12px; color:var(--texto-dim);">
+      📎 <strong style="color:var(--texto);">Referencia:</strong> Ver <em>Instrucciones_Drive_3410069</em> para el paso a paso de creación de la carpeta y subida de archivos.
+    </div>
+  </div>
+
+  <!-- DATOS GUIA -->
+  <div class="sec-head">
+    <div class="sec-tag noche">🌙 Modalidad Virtual</div>
+    <h2 class="sec-titulo">Información general</h2>
+  </div>
+  <div class="guia-grid">
+    <div class="guia-card">
+      <div class="icon">🏫</div>
+      <h4>Datos del programa</h4>
+      <p>Nombre del programa: <strong>Informática: Microsoft Word, Excel e Internet</strong><br>Grupo: <strong>Instituto María Auxiliadora</strong><br>Centro: <strong>Centro Agroempresarial y Desarrollo Pecuario del Huila – Regional Huila – Garzón</strong><br>Ficha: <em>pendiente de asignación</em></p>
+    </div>
+    <div class="guia-card">
+      <div class="icon">⏱️</div>
+      <h4>Tiempos</h4>
+      <p>Modalidad: <strong>100% virtual</strong><br>Jornada: <strong>Nocturna</strong><br>Horario: <strong>7:30–8:30 pm o 8:30–9:30 pm</strong><br>Fechas: <strong>10 (8 sep – 23 sep 2026)</strong></p>
+    </div>
+    <div class="guia-card">
+      <div class="icon">🧑‍💻</div>
+      <h4>Ambiente y metodología</h4>
+      <p>Encuentros sincrónicos por videollamada<br>Trabajo autónomo entre encuentros<br>Portafolio individual en Google Drive<br>Alternancia clase → práctica autónoma</p>
+    </div>
+    <div class="guia-card">
+      <div class="icon">📊</div>
+      <h4>Evaluación</h4>
+      <p>Verificación de entregables en Drive por módulo<br>Word, PowerPoint y Excel<br>Cierre con entrega de notas: <strong>23 de septiembre</strong></p>
+    </div>
+  </div>
+
+</div><!-- /main -->
+
+<!-- FOOTER -->
+<footer>
+  <p>Plan de Trabajo Virtual · <span>Informática: Word, Excel e Internet</span> · Instituto María Auxiliadora</p>
+  <p>Centro Agroempresarial y Desarrollo Pecuario del Huila – Regional Huila – Garzón · <span>SENA</span></p>
+  <p>Instructor: <span>Julián Andrés Trujillo Morales</span> · Septiembre 2026</p>
+</footer>
+
+<!-- ════ MODAL ════ -->
+<div class="overlay" id="overlay" onclick="cerrarModalOverlay(event)">
+  <div class="modal" id="modal">
+    <div class="modal-stripe" id="modal-stripe"></div>
+    <div class="modal-header">
+      <div class="modal-header-left">
+        <div class="modal-sesnum" id="modal-sesnum"></div>
+        <div class="modal-titulo" id="modal-titulo"></div>
+        <div class="modal-fecha" id="modal-fecha"></div>
+      </div>
+      <button class="modal-close" onclick="cerrarModal()">✕</button>
+    </div>
+    <div class="modal-body" id="modal-body"></div>
+    <div class="modal-footer">
+      <div style="font-size:11px; color:var(--texto-dimmer);" id="modal-tag"></div>
+      <div style="display:flex; gap:8px;">
+        <button class="btn-prev" id="btn-prev" onclick="navModal(-1)">← Anterior</button>
+        <button class="btn-next" id="btn-next" onclick="navModal(1)">Siguiente →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const FECHAS = [
+  {
+    num: 1, titulo: "Socialización y plan de trabajo",
+    fecha: "Martes 8 de septiembre · Noche",
+    tag: "Encuentro virtual", color: "#39a900",
+    acts: [
+      { time:"7:30–8:30 / 8:30–9:30 pm", nombre:"Socialización del curso", desc:"Presentación del instructor, del grupo, de la modalidad virtual y del plan de trabajo actualizado (esta página)." },
+      { time:"", nombre:"Explicación de la dinámica", desc:"Alternancia entre encuentros virtuales y días de trabajo autónomo, uso de Drive para entrega de evidencias, canal de comunicación con el instructor." }
+    ],
+    entregable:"Ninguno — sesión informativa. Se socializa el plan de trabajo virtual completo."
+  },
+  {
+    num: 2, titulo: "Drive: estructura y entrega de evidencias",
+    fecha: "Sábado 12 de septiembre · Noche",
+    tag: "Encuentro virtual", color: "#39a900",
+    acts: [
+      { time:"7:30–8:30 / 8:30–9:30 pm", nombre:"Explicación del Drive del curso", desc:"Recorrido guiado por la estructura de carpetas (Instrucciones_Drive_3410069): portafolio instructor, portafolio aprendiz y documentos de desarrollo de la formación.", file:"Instrucciones_Drive_3410069.html" },
+      { time:"", nombre:"Cómo subir evidencias", desc:"Paso a paso para crear la carpeta personal, abrir la subcarpeta correcta y subir/reemplazar archivos." }
+    ],
+    entregable:"Ninguno — se prepara el terreno para el trabajo autónomo del día siguiente."
+  },
+  {
+    num: 3, titulo: "Trabajo autónomo — Creación de carpeta personal",
+    fecha: "Domingo 13 de septiembre",
+    tag: "Trabajo autónomo", color: "#f59e0b",
+    acts: [
+      { time:"Todo el día", nombre:"Crear carpeta personal en Drive", desc:"Cada aprendiz crea su carpeta con su nombre completo, siguiendo las instrucciones explicadas el sábado." },
+      { time:"", nombre:"Crear 3 subcarpetas fijas", desc:"Dentro de la carpeta personal: 1. WORD, 2. POWERPOINT y 3. EXCEL." }
+    ],
+    entregable:"Carpeta con nombre completo del aprendiz + 3 subcarpetas (1. WORD, 2. POWERPOINT, 3. EXCEL) compartida con el instructor."
+  },
+  {
+    num: 4, titulo: "Word 365",
+    fecha: "Lunes 14 de septiembre · Noche",
+    tag: "Encuentro virtual", color: "#39a900",
+    acts: [
+      { time:"7:30–8:30 / 8:30–9:30 pm", nombre:"Introducción a Word 365", desc:"Historia, concepto WYSIWYG, evolución del procesador de texto.", file:"1. Intro_word365.html" },
+      { time:"", nombre:"Atajos de teclado", desc:"Productividad y atajos esenciales en Word 365.", file:"2. Atajos_word365.html" },
+      { time:"", nombre:"Pestañas principales de Word", desc:"Recorrido por las pestañas y herramientas clave del programa.", file:"3. Grupos_Word_365.html" }
+    ],
+    entregable:"Se explica la actividad práctica que se debe desarrollar de forma autónoma al día siguiente."
+  },
+  {
+    num: 5, titulo: "Trabajo autónomo — Word",
+    fecha: "Martes 15 de septiembre",
+    tag: "Trabajo autónomo", color: "#f59e0b",
+    acts: [
+      { time:"Todo el día", nombre:"Práctica individual en Word", desc:"El aprendiz desarrolla la actividad de Word asignada en el encuentro anterior." },
+      { time:"", nombre:"Subida de evidencia", desc:"Subir el archivo resultante a la subcarpeta 1. WORD dentro de su carpeta personal en Drive." }
+    ],
+    entregable:"Archivo de Word con la actividad práctica desarrollada, subido a la subcarpeta 1. WORD."
+  },
+  {
+    num: 6, titulo: "PowerPoint 365",
+    fecha: "Sábado 19 de septiembre · Noche",
+    tag: "Encuentro virtual", color: "#39a900",
+    acts: [
+      { time:"7:30–8:30 / 8:30–9:30 pm", nombre:"Introducción a PowerPoint 365", desc:"Historia, evolución e impacto comunicacional de las presentaciones.", file:"1. Intro_powerpoint365.html" },
+      { time:"", nombre:"Atajos y diseño ágil", desc:"Productividad y atajos esenciales en PowerPoint 365.", file:"2. Atajos_powerpoint365.html" },
+      { time:"", nombre:"Pestañas principales de PowerPoint", desc:"Recorrido por las pestañas y herramientas clave del programa.", file:"3. Grupos_PowerPoint_365.html" }
+    ],
+    entregable:"Se explica la actividad práctica que se debe desarrollar de forma autónoma al día siguiente."
+  },
+  {
+    num: 7, titulo: "Trabajo autónomo — PowerPoint",
+    fecha: "Domingo 20 de septiembre",
+    tag: "Trabajo autónomo", color: "#f59e0b",
+    acts: [
+      { time:"Todo el día", nombre:"Práctica individual en PowerPoint", desc:"El aprendiz desarrolla la presentación asignada en el encuentro anterior." },
+      { time:"", nombre:"Subida de evidencia", desc:"Subir el archivo resultante a la subcarpeta 2. POWERPOINT dentro de su carpeta personal en Drive." }
+    ],
+    entregable:"Archivo de PowerPoint con la presentación desarrollada, subido a la subcarpeta 2. POWERPOINT."
+  },
+  {
+    num: 8, titulo: "Excel 365",
+    fecha: "Lunes 21 de septiembre · Noche",
+    tag: "Encuentro virtual", color: "#39a900",
+    acts: [
+      { time:"7:30–8:30 / 8:30–9:30 pm", nombre:"Introducción a Excel 365", desc:"Historia, concepto de hoja de cálculo, evolución.", file:"0.0 - Introducción a Excel 365.html" },
+      { time:"", nombre:"Atajos y pestañas de Excel", desc:"Productividad y recorrido por las pestañas principales.", file:"0.2 - Atajos_excel365.html" },
+      { time:"", nombre:"Formato y fórmulas básicas", desc:"Formato de celdas y fórmulas esenciales (SUMA, PROMEDIO, MAX, MIN, SI).", file:"Ejercicio 1 - Formato Básico (INICIO).html + Ejercicio 4 - Fórmulas Básicas.html" }
+    ],
+    entregable:"Se explica la actividad práctica que se debe desarrollar de forma autónoma al día siguiente."
+  },
+  {
+    num: 9, titulo: "Trabajo autónomo — Excel",
+    fecha: "Martes 22 de septiembre",
+    tag: "Trabajo autónomo", color: "#f59e0b",
+    acts: [
+      { time:"Todo el día", nombre:"Práctica individual en Excel", desc:"El aprendiz desarrolla el ejercicio de Excel asignado en el encuentro anterior." },
+      { time:"", nombre:"Subida de evidencia", desc:"Subir el archivo resultante a la subcarpeta 3. EXCEL dentro de su carpeta personal en Drive." }
+    ],
+    entregable:"Archivo de Excel con el ejercicio práctico desarrollado, subido a la subcarpeta 3. EXCEL."
+  },
+  {
+    num: 10, titulo: "Cierre de la formación y entrega de notas",
+    fecha: "Miércoles 23 de septiembre · Noche",
+    tag: "Cierre", color: "#8b5cf6",
+    acts: [
+      { time:"7:30–8:30 / 8:30–9:30 pm", nombre:"Verificación final del portafolio", desc:"Revisión conjunta de que cada aprendiz tenga completas sus 3 subcarpetas (Word, PowerPoint y Excel) con las evidencias correspondientes." },
+      { time:"", nombre:"Socialización de resultados y notas", desc:"Retroalimentación general del proceso formativo y comunicación de las notas finales." }
+    ],
+    entregable:"Portafolio Drive completo con las 3 subcarpetas (Word, PowerPoint, Excel) y sus respectivas evidencias."
+  }
+];
+
+let sesionActual = 0;
+
+function abrirModal(idx) {
+  sesionActual = idx;
+  renderModal(idx);
+  document.getElementById('overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function cerrarModal() {
+  document.getElementById('overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function cerrarModalOverlay(e) {
+  if (e.target === document.getElementById('overlay')) cerrarModal();
+}
+
+function navModal(dir) {
+  const nuevo = sesionActual + dir;
+  if (nuevo >= 0 && nuevo < FECHAS.length) {
+    sesionActual = nuevo;
+    renderModal(nuevo);
+    document.getElementById('modal-body').scrollTop = 0;
+  }
+}
+
+function renderModal(idx) {
+  const s = FECHAS[idx];
+
+  document.getElementById('modal-stripe').style.background =
+    `linear-gradient(90deg, ${s.color}, #1a1a2e)`;
+  document.getElementById('modal-sesnum').textContent = `Fecha ${s.num} de ${FECHAS.length}  ·  ${s.tag}`;
+  document.getElementById('modal-titulo').textContent = s.titulo;
+  document.getElementById('modal-fecha').textContent = s.fecha;
+  document.getElementById('modal-tag').textContent = s.tag;
+
+  document.getElementById('btn-prev').disabled = idx === 0;
+  document.getElementById('btn-next').disabled = idx === FECHAS.length - 1;
+
+  let html = '';
+
+  html += '<div style="margin-bottom:4px;">';
+  s.acts.forEach(a => {
+    html += `<div class="act-row">
+      <span class="act-time">${a.time}</span>
+      <div class="act-info">
+        <strong>${a.nombre}</strong>
+        <span>${a.desc}</span>
+        ${a.file ? `<span class="act-file">${a.file}</span>` : ''}
+      </div>
+    </div>`;
+  });
+  html += '</div>';
+
+  html += `<div class="entregable-box">
+    <span class="ico">📤</span>
+    <div>
+      <h5>Entregable</h5>
+      <p>${s.entregable}</p>
+    </div>
+  </div>`;
+
+  document.getElementById('modal-body').innerHTML = html;
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') cerrarModal();
+  if (e.key === 'ArrowRight') navModal(1);
+  if (e.key === 'ArrowLeft') navModal(-1);
+});
+</script>
+</body>
+</html>
